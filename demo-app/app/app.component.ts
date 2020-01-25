@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo-app';
+  counter = 0;
+  show = true;
+
+  toggleCounter() {
+    this.show = !this.show;
+  }
+
+  increment(): void {
+    this.counter++;
+  }
 }

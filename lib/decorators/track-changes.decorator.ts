@@ -8,7 +8,7 @@ import { ChangesStrategy } from '../enums/changes-strategy.enum';
    * @param strategy changes strategy to be applied
 */
 export function TrackChanges<T>(key: string, methodName: string, strategy: ChangesStrategy = ChangesStrategy.Each) {
-  return function(targetClass, descriptor) {
+  return function(targetClass, functionName: string, descriptor) {
     const source = descriptor.value;
 
     descriptor.value = function (changes: SimpleChanges) {
