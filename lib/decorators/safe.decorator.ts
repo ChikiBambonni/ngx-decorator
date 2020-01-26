@@ -2,7 +2,8 @@ import { SafeParams } from 'lib/interfaces/safe-params.interface';
 import { SafeLogLevel } from 'lib/enums/log-level.enum';
 
 /**
-   * @param params SafeParams interface
+    * @param params SafeParams interface
+    * @returns {Function}
 */
 export function Safe<T>(params: SafeParams<T> = {}): Function {
   return function(target: object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> {

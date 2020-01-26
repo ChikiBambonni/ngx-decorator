@@ -1,10 +1,16 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy, ErrorHandler } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  OnDestroy,
+  ErrorHandler
+} from '@angular/core';
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { TrackChanges, TakeUntilDestroy } from 'lib';
+import { TrackChanges, TakeUntilDestroy, Safe, Cache } from 'lib';
 import { ChangesStrategy } from 'lib/enums/changes-strategy.enum';
-import { Safe } from 'lib/decorators/safe.decorator';
 import { SafeLogLevel } from 'lib/enums/log-level.enum';
 
 @Component({
@@ -23,14 +29,20 @@ export class CounterComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private errorHandler: ErrorHandler) { }
 
   ngOnInit() {
-    interval(2000).pipe(
+    /* interval(2000).pipe(
       takeUntil(this.componentDestroy())
     ).subscribe(() => {
       console.log('Interval tick');
     });
 
-    const result = this.throwErr();
-    console.log(result);
+    const result = this.throwErr(); */
+
+    console.log(
+      this.add(10, 20),
+      this.add(20, 30),
+      this.add('str', 10),
+      this.add(11, 20),
+    );
   }
 
   @TrackChanges<number>('counter', 'counterChange', ChangesStrategy.NotFirst)
@@ -50,5 +62,18 @@ export class CounterComponent implements OnInit, OnChanges, OnDestroy {
   })
   throwErr() {
     throw new Error('err thorwn');
+  }
+
+  @Safe<number>({ returnValue: null })
+  @Cache({
+    cacheKey: 'myKey',
+    useParamsAsKeys: true
+  })
+  add(a, b) {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+      throw new Error('invalid arguments');
+    }
+
+    return a + b;
   }
 }
