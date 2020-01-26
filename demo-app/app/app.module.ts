@@ -1,9 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterComponent } from './components/counter/counter.component';
+
+class MyErrorHandler implements ErrorHandler {
+  handleError(error) {
+    console.log('Handling error:', error);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -14,7 +20,7 @@ import { CounterComponent } from './components/counter/counter.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
