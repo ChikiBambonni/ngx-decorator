@@ -140,7 +140,6 @@ Set of useful decorators for Angular
             );
         }
 
-
         @Safe<number>({ returnValue: null })
         @Cache({
             cacheKey: 'myKey',
@@ -156,3 +155,41 @@ Set of useful decorators for Angular
     }
     ```
     In this snippet result of forth call to `this.add` will be retrived from cache.
+
+5.  `@OutsideAngular` - escape Angular's zone and do work that doesn't trigger Angular change-detection
+
+    Decorator does not accepts parameters:
+
+    ```typescript
+    export class AppComponent implements OnInit {
+        counter = 0;
+
+        constructor(private ngZone: NgZone) {}
+
+        ngOnInit() {
+            this.processOutsideOfAngularZone();
+        }
+
+
+        @OutsideAngular
+        processOutsideOfAngularZone() {
+            this.title = 'outside';
+
+            this.increaseProgress(() => {
+                this.ngZone.run(() => { console.log('Outside Done!'); });
+            });
+        }
+
+        increaseProgress(doneCallback: () => void) {
+            this.counter += 1;
+            console.log(`Current progress: ${this.counter}%`);
+
+            if (this.counter < 10) {
+                window.setTimeout(() => this.increaseProgress(doneCallback), 1000);
+            } else {
+                doneCallback();
+            }
+        }
+    }
+    ```
+    In this snippet each tick of `increaseProgress` function willbe executed in Angular's parent zone
