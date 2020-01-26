@@ -12,7 +12,7 @@
     "angular"
   ],
   "author": "Danil Litvinchuk",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
