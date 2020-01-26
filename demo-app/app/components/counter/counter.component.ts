@@ -29,13 +29,13 @@ export class CounterComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private errorHandler: ErrorHandler) { }
 
   ngOnInit() {
-    /* interval(2000).pipe(
+    interval(2000).pipe(
       takeUntil(this.componentDestroy())
     ).subscribe(() => {
       console.log('Interval tick');
     });
 
-    const result = this.throwErr(); */
+    const result = this.throwErr();
 
     console.log(
       this.add(10, 20),

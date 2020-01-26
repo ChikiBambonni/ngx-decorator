@@ -1,0 +1,6 @@
+/**
+ * Generated bundle index. Do not edit.
+ */
+export * from './index';
+export { ChangesStrategy as ɵa } from './enums/changes-strategy.enum';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmd4LWRlY29yYXRvci5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25neC1kZWNvcmF0b3IvIiwic291cmNlcyI6WyJuZ3gtZGVjb3JhdG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYyxTQUFTLENBQUM7QUFFeEIsT0FBTyxFQUFDLGVBQWUsSUFBSSxFQUFFLEVBQUMsTUFBTSwrQkFBK0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9pbmRleCc7XG5cbmV4cG9ydCB7Q2hhbmdlc1N0cmF0ZWd5IGFzIMm1YX0gZnJvbSAnLi9lbnVtcy9jaGFuZ2VzLXN0cmF0ZWd5LmVudW0nOyJdfQ==

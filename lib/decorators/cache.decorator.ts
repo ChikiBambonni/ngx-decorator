@@ -1,5 +1,5 @@
-import { serializeObject } from 'lib/utils/core.utils';
-import { CacheParams } from 'lib/interfaces/cache-params.interface';
+import { serializeObject } from '../utils/core.utils';
+import { CacheParams } from '../interfaces/cache-params.interface';
 
 /**
  * @param params cache params

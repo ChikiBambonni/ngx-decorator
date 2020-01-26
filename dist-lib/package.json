@@ -31,16 +31,6 @@
     "type": "git",
     "url": "https://github.com/ChikiBambonni/ngx-decorator"
   },
-  "scripts": {
-    "ng": "ng",
-    "start": "npm run compile && ng serve",
-    "build": "npm run compile && ng build",
-    "test": "npm run compile && ng test",
-    "lint": "npm run compile && ng lint",
-    "e2e": "npm run compile && ng e2e",
-    "compile": "ng-packagr -p ng-package.json",
-    "publish:dist": "npm run compile && npm publish dist-lib"
-  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.23",
     "@angular/animations": "~8.2.14",
@@ -73,5 +63,18 @@
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
     "zone.js": "~0.9.1"
+  },
+  "main": "bundles/ngx-decorator.umd.js",
+  "module": "fesm5/ngx-decorator.js",
+  "es2015": "fesm2015/ngx-decorator.js",
+  "esm5": "esm5/ngx-decorator.js",
+  "esm2015": "esm2015/ngx-decorator.js",
+  "fesm5": "fesm5/ngx-decorator.js",
+  "fesm2015": "fesm2015/ngx-decorator.js",
+  "typings": "ngx-decorator.d.ts",
+  "metadata": "ngx-decorator.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
   }
 }

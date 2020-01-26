@@ -1,5 +1,5 @@
-import { SafeParams } from 'lib/interfaces/safe-params.interface';
-import { SafeLogLevel } from 'lib/enums/log-level.enum';
+import { SafeParams } from '../interfaces/safe-params.interface';
+import { SafeLogLevel } from '../enums/log-level.enum';
 
 /**
     * @param params SafeParams interface

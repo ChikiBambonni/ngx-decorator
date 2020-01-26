@@ -1,12 +1,6 @@
-# ngx-decorator
+# angular-decorators
+
 Set of useful decorators for Angular
-
-# Installation
-
-```bash
-npm install ngx-decorator --save
-
-```
 
 # Supported decorators
 
