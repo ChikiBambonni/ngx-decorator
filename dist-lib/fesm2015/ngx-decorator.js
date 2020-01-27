@@ -162,5 +162,5 @@ function OutsideAngular(targetClass, functionName, descriptor) {
  * Generated bundle index. Do not edit.
  */
 
-export { Cache, OutsideAngular, Safe, TakeUntilDestroy, TrackChanges, ChangesStrategy as ɵa };
+export { Cache, ChangesStrategy, OutsideAngular, Safe, SafeLogLevel, TakeUntilDestroy, TrackChanges };
 //# sourceMappingURL=ngx-decorator.js.map

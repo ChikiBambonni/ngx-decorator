@@ -14,12 +14,16 @@ npm install ngx-decorator --save
 
     First you need to decorate your component class which implements `OnDestroy` interface with `@TakeUntilDestroy` decorator:
     ```typescript
+    import { TakeUntilDestroy } from 'ngx-decorator';
+
     @TakeUntilDestroy
     export class CounterComponent implements OnInit, OnDestroy {}
     ```
 
     Next step is to create private field `componentDestroy: Function` in your component and use it in pipe method with rxjs `takeUntil` operator:
     ```typescript
+    import { TakeUntilDestroy } from 'ngx-decorator';
+
     @TakeUntilDestroy
     export class CounterComponent implements OnInit, OnDestroy {
 
@@ -55,6 +59,8 @@ npm install ngx-decorator --save
     ```
     In this snippet `counterChange` method will be called on every data-bound property change of `@Input() counter` field using `ChangesStrategy.NotFirst`:
     ```typescript
+    import { TrackChanges, ChangesStrategy } from 'ngx-decorator';
+
     export class CounterComponent implements OnChanges {
 
         @Input()
@@ -94,6 +100,8 @@ npm install ngx-decorator --save
     Decorate any method in component with `@Safe` decorator in following way:
 
     ```typescript
+    import { Safe, SafeLogLevel } from 'ngx-decorator';
+
     export class CounterComponent implements OnInit, OnChanges, OnDestroy {
 
         constructor(private errorHandler: ErrorHandler) { }
@@ -133,6 +141,8 @@ npm install ngx-decorator --save
 
     Store result of a function in cache: 
     ```typescript
+    import { Cache, Safe } from 'ngx-decorator';
+
     export class CounterComponent implements OnInit {
 
         constructor() { }
@@ -167,6 +177,8 @@ npm install ngx-decorator --save
     Decorator does not accepts parameters:
 
     ```typescript
+    import { OutsideAngular } from 'ngx-decorator';
+
     export class AppComponent implements OnInit {
         counter = 0;
 

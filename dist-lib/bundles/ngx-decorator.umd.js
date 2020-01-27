@@ -233,7 +233,7 @@
         ChangesStrategy["First"] = "First";
         ChangesStrategy["Each"] = "Each";
         ChangesStrategy["NotFirst"] = "NotFirst";
-    })(exports.ɵa || (exports.ɵa = {}));
+    })(exports.ChangesStrategy || (exports.ChangesStrategy = {}));
 
     /**
        * @param key @Input() fieled name
@@ -242,16 +242,16 @@
        * @returns {Function}
     */
     function TrackChanges(key, methodName, strategy) {
-        if (strategy === void 0) { strategy = exports.ɵa.Each; }
+        if (strategy === void 0) { strategy = exports.ChangesStrategy.Each; }
         return function (targetClass, functionName, descriptor) {
             var source = descriptor.value;
             descriptor.value = function (changes) {
                 if (changes && changes[key]
                     && changes[key].currentValue) {
                     var isFirstChange = changes[key].firstChange;
-                    if (strategy === exports.ɵa.Each ||
-                        (strategy === exports.ɵa.First && isFirstChange) ||
-                        (strategy === exports.ɵa.NotFirst && !isFirstChange)) {
+                    if (strategy === exports.ChangesStrategy.Each ||
+                        (strategy === exports.ChangesStrategy.First && isFirstChange) ||
+                        (strategy === exports.ChangesStrategy.NotFirst && !isFirstChange)) {
                         targetClass[methodName].call(this, changes[key].currentValue);
                     }
                 }
@@ -261,12 +261,12 @@
         };
     }
 
-    var SafeLogLevel;
+
     (function (SafeLogLevel) {
         SafeLogLevel["Default"] = "Default";
         SafeLogLevel["Console"] = "Console";
         SafeLogLevel["ErrorHandler"] = "ErrorHandler";
-    })(SafeLogLevel || (SafeLogLevel = {}));
+    })(exports.SafeLogLevel || (exports.SafeLogLevel = {}));
 
     /**
         * @param params SafeParams interface
@@ -276,16 +276,16 @@
         if (params === void 0) { params = {}; }
         return function (target, propertyKey, descriptor) {
             var originalMethod = descriptor.value;
-            var logLevel = params.logLevel || SafeLogLevel.Default;
+            var logLevel = params.logLevel || exports.SafeLogLevel.Default;
             descriptor.value = function SafeWrapper() {
                 try {
                     return originalMethod.apply(this, arguments);
                 }
                 catch (error) {
-                    if (logLevel === SafeLogLevel.Console) {
+                    if (logLevel === exports.SafeLogLevel.Console) {
                         console.error(error);
                     }
-                    if (logLevel === SafeLogLevel.ErrorHandler) {
+                    if (logLevel === exports.SafeLogLevel.ErrorHandler) {
                         if (!this.errorHandler) {
                             throw new Error("\n                Class with 'Safe' decorator and logLevel 'ErrorHandler'\n                should have 'errorHandler' class property with 'ErrorHandler' class.");
                         }
