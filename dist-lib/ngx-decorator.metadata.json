@@ -1,1 +1,0 @@
-{"__symbolic":"module","version":4,"exports":[{"from":"./cache-params.interface"},{"from":"./safe-params.interface"},{"from":"./safe.decorator"},{"from":"./cache.decorator"},{"from":"./outside-angular.decorator"}],"metadata":{},"origins":{},"importAs":"ngx-decorator"}
