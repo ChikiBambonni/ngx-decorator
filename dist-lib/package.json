@@ -1,6 +1,6 @@
 {
   "name": "ngx-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set of useful decorators for Angular",
   "author": "Danil Litvinchuk",
   "license": "MIT",

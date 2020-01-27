@@ -1,6 +1,12 @@
-# angular-decorators
-
+# ngx-decorator
 Set of useful decorators for Angular
+
+# Installation
+
+```bash
+npm install ngx-decorator --save
+
+```
 
 # Supported decorators
 
@@ -12,18 +18,18 @@ Set of useful decorators for Angular
     export class CounterComponent implements OnInit, OnDestroy {}
     ```
 
-    Next step is to create private field `_componentDestroy: Function` in your component and use it in pipe method with rxjs `takeUntil` operator:
+    Next step is to create private field `componentDestroy: Function` in your component and use it in pipe method with rxjs `takeUntil` operator:
     ```typescript
     @TakeUntilDestroy
     export class CounterComponent implements OnInit, OnDestroy {
 
-        private _componentDestroy: Function;
+        private componentDestroy: Function;
 
         constructor() { }
 
         ngOnInit() {
             interval(2000).pipe(
-                takeUntil(this._componentDestroy())
+                takeUntil(this.componentDestroy())
             ).subscribe(() => {
                 console.log('Interval tick');
             });
@@ -169,7 +175,6 @@ Set of useful decorators for Angular
         ngOnInit() {
             this.processOutsideOfAngularZone();
         }
-
 
         @OutsideAngular
         processOutsideOfAngularZone() {

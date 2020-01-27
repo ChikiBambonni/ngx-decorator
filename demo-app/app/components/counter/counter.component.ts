@@ -10,8 +10,7 @@ import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { TrackChanges, TakeUntilDestroy, Safe, Cache } from 'lib';
-import { ChangesStrategy } from 'lib/enums/changes-strategy.enum';
-import { SafeLogLevel } from 'lib/enums/log-level.enum';
+import { ChangesStrategy, SafeLogLevel } from 'lib/enums';
 
 @Component({
   selector: 'app-counter',
