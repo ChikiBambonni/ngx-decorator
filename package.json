@@ -41,6 +41,7 @@
     "compile": "ng-packagr -p ng-package.json",
     "publish:dist": "npm run compile && npm publish dist-lib"
   },
+  "dependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.23",
     "@angular/animations": "~8.2.14",

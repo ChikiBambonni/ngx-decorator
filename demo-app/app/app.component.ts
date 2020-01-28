@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 
-import { OutsideAngular } from 'lib/decorators/outside-angular.decorator';
+import { OutsideAngular } from 'lib';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,6 @@ import { OutsideAngular } from 'lib/decorators/outside-angular.decorator';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'demo-app';
   counter = 0;
   show = true;
 
@@ -28,8 +27,6 @@ export class AppComponent implements OnInit {
 
   @OutsideAngular
   processOutsideOfAngularZone() {
-    this.title = 'outside';
-
     this.increaseProgress(() => {
       this.ngZone.run(() => { console.log('Outside Done!'); });
     });

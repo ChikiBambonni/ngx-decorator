@@ -1,6 +1,10 @@
 import { SimpleChanges } from '@angular/core';
 
-import { ChangesStrategy } from '../enums/changes-strategy.enum';
+export enum ChangesStrategy {
+  First = 'First',
+  Each = 'Each',
+  NotFirst = 'NotFirst'
+}
 
 /**
    * @param key @Input() fieled name

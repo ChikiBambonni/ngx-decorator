@@ -1,11 +1,25 @@
-import { serializeObject } from '../utils/core.utils';
-import { CacheParams } from '../interfaces/cache-params.interface';
+export const serializeObject = (obj?: object): string => {
+    let str = '';
+
+    if (obj) {
+        Object.keys(obj).forEach((key: string) => {
+            if (str !== '') str += '&';
+            str += `${key}=${encodeURIComponent(obj[key])}`;
+        });
+    }
+
+    return str;
+};
+
+export interface CacheParams {
+    cacheKey?: string;
+    useParamsAsKeys?: boolean;
+};
 
 /**
  * @param params cache params
  * @returns {Function}
  */
-// tslint:disable-next-line: ban-types
 export function Cache(params: CacheParams = {}): Function {
     const cache = {
         data: new Map<string, any>(),
@@ -17,7 +31,6 @@ export function Cache(params: CacheParams = {}): Function {
         }
     };
 
-    // tslint:disable-next-line: only-arrow-functions
     return function(target, key, descriptor) {
         if (descriptor === undefined) {
             descriptor = Object.getOwnPropertyDescriptor(target, key);

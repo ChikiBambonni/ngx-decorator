@@ -1,4 +1,6 @@
-
+/**
+  * @returns {TypedPropertyDescriptor}
+*/
 export function OutsideAngular(targetClass: any, functionName: string, descriptor) {
     const source = descriptor.value;
 

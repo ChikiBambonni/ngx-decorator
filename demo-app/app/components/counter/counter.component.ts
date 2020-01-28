@@ -9,8 +9,15 @@ import {
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { TrackChanges, TakeUntilDestroy, Safe, Cache } from 'lib';
-import { ChangesStrategy, SafeLogLevel } from 'lib/enums';
+import { 
+  TakeUntilDestroy,
+  TrackChanges,
+  Safe,
+  Cache,
+  SafeLogLevel,
+  ChangesStrategy
+} from 'lib';
+SafeLogLevel
 
 @Component({
   selector: 'app-counter',
