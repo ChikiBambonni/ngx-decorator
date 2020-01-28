@@ -1,25 +1,17 @@
 {
   "name": "ngx-decorator",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Set of useful decorators for Angular",
   "author": "Danil Litvinchuk",
   "license": "MIT",
   "keywords": [
     "ng",
+    "ngx",
+    "decorator",
     "decorators",
+    "decoratre",
     "angular",
-    "angular2",
-    "angular4",
-    "angular5",
-    "angular6",
-    "angular7",
-    "angular8",
-    "angular-2",
-    "angular-4",
-    "angular-5",
-    "angular-6",
-    "angular-7",
-    "angular-8"
+    "Angular"
   ],
   "contributors": [
     {
