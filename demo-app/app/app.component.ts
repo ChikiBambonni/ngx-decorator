@@ -14,7 +14,8 @@ export class AppComponent implements OnInit {
   constructor(private ngZone: NgZone) {}
 
   ngOnInit() {
-    this.processOutsideOfAngularZone();
+    // this.processOutsideOfAngularZone();
+
   }
 
   toggleCounter() {

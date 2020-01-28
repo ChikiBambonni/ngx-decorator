@@ -4,6 +4,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { TodosComponent } from './components/todos/todos.component';
+import { HttpClientModule } from '@angular/common/http';
 
 class MyErrorHandler implements ErrorHandler {
   handleError(error) {
@@ -14,11 +16,13 @@ class MyErrorHandler implements ErrorHandler {
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent
+    CounterComponent,
+    TodosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{provide: ErrorHandler, useClass: MyErrorHandler}],
   bootstrap: [AppComponent]
