@@ -115,7 +115,7 @@ npm install ngx-decorator --save
             returnValue: false
         })
         throwErr() {
-            throw new Error('err thorwn');
+            throw new Error('err thrown');
         }
     }
     ```
@@ -152,7 +152,7 @@ npm install ngx-decorator --save
                 this.add(10, 20),
                 this.add(20, 30),
                 this.add('str', 10),
-                this.add(10, 20),
+                this.add(10, 20), // <------- result of this call will be taken from cache
             );
         }
 
@@ -190,8 +190,6 @@ npm install ngx-decorator --save
 
         @OutsideAngular
         processOutsideOfAngularZone() {
-            this.title = 'outside';
-
             this.increaseProgress(() => {
                 this.ngZone.run(() => { console.log('Outside Done!'); });
             });
