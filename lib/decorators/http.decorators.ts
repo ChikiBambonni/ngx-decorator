@@ -40,3 +40,25 @@ export function Get(endpoint: string) {
         return descriptor;
     };
 }
+
+export function Request(method: string, endpoint: string) {
+    return function(targetClass, functionName, descriptor) {
+        if (descriptor === undefined) {
+            descriptor = Object.getOwnPropertyDescriptor(targetClass, functionName);
+        }
+
+        descriptor.value = function() {
+            if (!this.httpClient) {
+                throw new Error(`Class with 'Get' decorator should have 'httpClient' class property with 'HttpClient' class.`);
+            }
+
+            const args = [...arguments];
+            const params = args[0];
+            const body = args[1];
+
+            return this.httpClient.request(method, `${this.apiUrl}/${endpoint}`, { body, params: getRequestParams(params) });
+        };
+
+        return descriptor;
+    };
+}

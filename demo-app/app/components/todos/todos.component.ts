@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-  
+
 import { HttpClient } from '@angular/common/http';
 
-import { HttpApi, Get } from 'lib';
+import { HttpApi, Get, Request } from 'lib';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -21,10 +21,21 @@ export class TodosComponent implements OnInit {
     }).subscribe(data => {
       console.log('Retrieving data - ', data);
     });
+
+    this.getViaRequest({
+      pagesize: 1
+    }).subscribe(data => {
+      console.log('Retrieving data via request - ', data);
+    });
   }
 
   @Get('mongoAPI_tests/Users')
   getAll(params?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('GET', 'mongoAPI_tests/Users')
+  getViaRequest(params?: object, body?: object): Observable<any> {
     return of();
   }
 }
