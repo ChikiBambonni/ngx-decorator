@@ -10,21 +10,21 @@ import { Observable, of } from 'rxjs';
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss']
 })
-@HttpApi('api')
+@HttpApi('capi')
 export class TodosComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    // this.getAll().subscribe(data => {
-    //   console.log('Retrieving data - ', data);
-    // });
-
-    console.log(this.getAll());
+    this.getAll({
+      pagesize: 1
+    }).subscribe(data => {
+      console.log('Retrieving data - ', data);
+    });
   }
 
-  @Get('db/col')
-  getAll() {
+  @Get('mongoAPI_tests/Users')
+  getAll(params?: object): Observable<any> {
     return of();
   }
 }
