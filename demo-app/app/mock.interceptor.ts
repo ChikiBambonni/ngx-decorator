@@ -15,10 +15,20 @@ export class MockDataInterceptor implements HttpInterceptor {
     constructor () {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const arrayLength = 10;
+        const pagesize = +req.params.get('page');
+        let data = new Array(arrayLength).fill(0).map((element: number, index: number) => index);
+
+        if (req.method === 'GET') {
+            data = data.filter((element: number) => element === pagesize);
+        } else if (req.method === 'POST') {
+            data = data.concat(...req.body);
+        }
+
         return of(new HttpResponse({
             status: 200,
-            body: [1,2,3]
+            body: data
         }))
         .pipe(delay(3000));
-  }
+    }
 }

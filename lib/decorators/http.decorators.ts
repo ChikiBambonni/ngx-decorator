@@ -26,15 +26,15 @@ export function Get(endpoint: string) {
             descriptor = Object.getOwnPropertyDescriptor(targetClass, functionName);
         }
 
-        descriptor.value = function() {
+        descriptor.value = function(params: object) {
             if (!this.httpClient) {
                 throw new Error(`Class with 'Get' decorator should have 'httpClient' class property with 'HttpClient' class.`);
             }
 
-            const args = [...arguments];
-            const params = args[0];
-
-            return this.httpClient.get(`${this.apiUrl}/${endpoint}`, { params: getRequestParams(params) });
+            return this.httpClient.get(
+                `${this.apiUrl}/${endpoint}`,
+                { params: getRequestParams(params) }
+            );
         };
 
         return descriptor;
@@ -47,16 +47,16 @@ export function Request(method: string, endpoint: string) {
             descriptor = Object.getOwnPropertyDescriptor(targetClass, functionName);
         }
 
-        descriptor.value = function() {
+        descriptor.value = function(params: object, body: object) {
             if (!this.httpClient) {
-                throw new Error(`Class with 'Get' decorator should have 'httpClient' class property with 'HttpClient' class.`);
+                throw new Error(`Class with 'Request' decorator should have 'httpClient' class property with 'HttpClient' class.`);
             }
 
-            const args = [...arguments];
-            const params = args[0];
-            const body = args[1];
-
-            return this.httpClient.request(method, `${this.apiUrl}/${endpoint}`, { body, params: getRequestParams(params) });
+            return this.httpClient.request(
+                method,
+                `${this.apiUrl}/${endpoint}`,
+                { body, params: getRequestParams(params) }
+            );
         };
 
         return descriptor;

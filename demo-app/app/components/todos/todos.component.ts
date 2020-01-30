@@ -17,15 +17,19 @@ export class TodosComponent implements OnInit {
 
   ngOnInit() {
     this.getAll({
-      pagesize: 1
+      page: 1
     }).subscribe(data => {
       console.log('Retrieving data - ', data);
     });
 
     this.getViaRequest({
-      pagesize: 1
+      page: 9
     }).subscribe(data => {
       console.log('Retrieving data via request - ', data);
+    });
+
+    this.addOne(null, [20, 30, 40]).subscribe(data => {
+      console.log("POST Data - ", data);
     });
   }
 
@@ -36,6 +40,11 @@ export class TodosComponent implements OnInit {
 
   @Request('GET', 'mongoAPI_tests/Users')
   getViaRequest(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('POST', 'mongoAPI_tests/Users')
+  addOne(params?: object, body?: object): Observable<any> {
     return of();
   }
 }
