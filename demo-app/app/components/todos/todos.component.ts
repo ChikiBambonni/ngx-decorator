@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { HttpApi, Get, Request } from 'lib';
+import { HttpApi, Get, Request, Post } from 'lib';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -31,10 +31,19 @@ export class TodosComponent implements OnInit {
     this.addOne(null, [20, 30, 40]).subscribe(data => {
       console.log("POST Data - ", data);
     });
+
+    this.addPost(null, [50, 60, 70]).subscribe(data => {
+      console.log("POST Data - ", data);
+    });
   }
 
   @Get('mongoAPI_tests/Users')
   getAll(params?: object): Observable<any> {
+    return of();
+  }
+
+  @Post('mongoAPI_tests/Users')
+  addPost(params?: object, body?: object): Observable<any> {
     return of();
   }
 
