@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { TodosComponent } from './components/todos/todos.component';
-import { MockDataInterceptor } from './mock.interceptor';
+import { MockDataInterceptor } from './mock/mock.interceptor';
 
 class MyErrorHandler implements ErrorHandler {
   handleError(error) {

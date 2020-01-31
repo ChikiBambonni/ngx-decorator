@@ -1,4 +1,4 @@
-import { Injectable, ɵɵresolveBody } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -6,18 +6,18 @@ import {
   HttpRequest,
   HttpResponse
 } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+import { mockData } from './mock.data';
 
 @Injectable()
 export class MockDataInterceptor implements HttpInterceptor {
     constructor () {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const arrayLength = 10;
         const pagesize = +req.params.get('page');
-        let data = new Array(arrayLength).fill(0).map((element: number, index: number) => index);
+        let data = mockData;
 
         if (req.method === 'GET') {
             data = data.filter((element: number) => element === pagesize);
