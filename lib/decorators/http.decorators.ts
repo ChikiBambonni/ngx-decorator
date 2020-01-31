@@ -118,3 +118,26 @@ export function Put(endpoint: string) {
         return descriptor;
     };
 }
+
+export function Patch(endpoint: string) {
+    return function(targetClass, functionName, descriptor) {
+
+        if (descriptor === undefined) {
+            descriptor = Object.getOwnPropertyDescriptor(targetClass, functionName);
+        }
+
+        descriptor.value = function(params: object, body: object) {
+            if (!this.httpClient) {
+                throw new Error(httpClientInjectorError(HttpDecoratorType.Patch));
+            }
+
+            return this.httpClient.patch(
+                `${this.apiUrl}/${endpoint}`,
+                body,
+                { params: getRequestParams(params) }
+            );
+        };
+
+        return descriptor;
+    };
+}

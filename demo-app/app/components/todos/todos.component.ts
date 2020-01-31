@@ -2,7 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { HttpApi, Get, Request, Post, Put } from 'lib';
+import { 
+  HttpApi,
+  Request,
+  Get,
+  Post,
+  Put,
+  Patch 
+} from 'lib';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -39,6 +46,13 @@ export class TodosComponent implements OnInit {
     this.replacePosts(null, [80, 90]).subscribe(data => {
       console.log("PUT Data - ", data);
     });
+
+    this.replacePost(null, {
+      value: 200 
+    }).subscribe(data => {
+      console.log("Patch Data - ", data);
+    });
+
   }
 
   @Get('mongoAPI_tests/Users')
@@ -53,6 +67,11 @@ export class TodosComponent implements OnInit {
 
   @Put('mongoAPI_tests/Users')
   replacePosts(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Patch('mongoAPI_tests/Users')
+  replacePost(params?: object, body?: object): Observable<any> {
     return of();
   }
 

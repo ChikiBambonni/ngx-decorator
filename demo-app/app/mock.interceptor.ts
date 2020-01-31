@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵɵresolveBody } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -25,6 +25,8 @@ export class MockDataInterceptor implements HttpInterceptor {
             data = data.concat(...req.body);
         } else if (req.method === 'PUT') {
             data = req.body;
+        } else if (req.method === 'PATCH') {
+            data = data.map((element: number) => req.body.value);
         }
 
         return of(new HttpResponse({
