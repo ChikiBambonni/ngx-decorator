@@ -27,6 +27,8 @@ export class MockDataInterceptor implements HttpInterceptor {
             data = req.body;
         } else if (req.method === 'PATCH') {
             data = data.map((element: number) => req.body.value);
+        } else if (req.method === 'DELETE') {
+            data = [];
         }
 
         return of(new HttpResponse({

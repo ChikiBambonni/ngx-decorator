@@ -8,7 +8,8 @@ import {
   Get,
   Post,
   Put,
-  Patch 
+  Patch, 
+  Delete
 } from 'lib';
 import { Observable, of } from 'rxjs';
 
@@ -53,6 +54,12 @@ export class TodosComponent implements OnInit {
       console.log("Patch Data - ", data);
     });
 
+    this.removePosts({
+      value: 200
+    }).subscribe(data => {
+      console.log("Delete Data - ", data);
+    });
+
   }
 
   @Get('mongoAPI_tests/Users')
@@ -72,6 +79,11 @@ export class TodosComponent implements OnInit {
 
   @Patch('mongoAPI_tests/Users')
   replacePost(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Delete('mongoAPI_tests/Users')
+  removePosts(params?: object): Observable<any> {
     return of();
   }
 

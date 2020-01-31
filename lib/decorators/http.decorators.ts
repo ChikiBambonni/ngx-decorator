@@ -141,3 +141,25 @@ export function Patch(endpoint: string) {
         return descriptor;
     };
 }
+
+export function Delete(endpoint: string) {
+    return function(targetClass, functionName, descriptor) {
+
+        if (descriptor === undefined) {
+            descriptor = Object.getOwnPropertyDescriptor(targetClass, functionName);
+        }
+
+        descriptor.value = function(params: object) {
+            if (!this.httpClient) {
+                throw new Error(httpClientInjectorError(HttpDecoratorType.Delete));
+            }
+
+            return this.httpClient.delete(
+                `${this.apiUrl}/${endpoint}`,
+                { params: getRequestParams(params) }
+            );
+        };
+
+        return descriptor;
+    };
+}
