@@ -23,6 +23,8 @@ export class MockDataInterceptor implements HttpInterceptor {
             data = data.filter((element: number) => element === pagesize);
         } else if (req.method === 'POST') {
             data = data.concat(...req.body);
+        } else if (req.method === 'PUT') {
+            data = req.body;
         }
 
         return of(new HttpResponse({
