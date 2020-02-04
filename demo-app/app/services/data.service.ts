@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { 
@@ -16,10 +17,10 @@ import {
 @HttpApi('api')
 export class DataService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   @Get('database/collection')
-  getAll(params?: object): Observable<any> {
+  getOne(params?: object): Observable<any> {
     return of();
   }
 
@@ -38,7 +39,7 @@ export class DataService {
     return of();
   }
 
-  @Delete('mongoAPI_tests/Users')
+  @Delete('database/collection')
   removeAll(params?: object): Observable<any> {
     return of();
   }

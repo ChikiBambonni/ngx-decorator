@@ -1,12 +1,26 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, getTestBed, inject, fakeAsync } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { DataService } from './data.service';
+import { mockData } from '../mock/mock.data';
 
 describe('DataService', () => {
+  let injector: TestBed;
   let service: DataService;
+  let httpMock: HttpTestingController;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = new DataService();
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [DataService]
+    });
+    injector = getTestBed();
+    service = injector.get(DataService);
+    httpMock = injector.get(HttpTestingController);
+  });
+
+  afterEach(() => {
+    
   });
   
   it('should be created', () => {
@@ -14,25 +28,20 @@ describe('DataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return data from @Get decorator', () => {
-    service.getAll().subscribe(data => {
-      
+  it('should return data from @Get decorator', (done) => {
+    const page = 1;
+    service.getOne().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
     });
-  });
 
-  it('should return data from @Post decorator', () => {
+    const req = httpMock.expectOne('api/database/collection');
 
-  });
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('GET');
 
-  it('should return data from @Put decorator', () => {
-
-  });
-
-  it('should return data from @Patch decorator', () => {
-
-  });
-
-  it('should return data from @Delete decorator', () => {
-
+    req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 });

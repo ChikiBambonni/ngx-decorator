@@ -16,11 +16,11 @@ export class MockDataInterceptor implements HttpInterceptor {
     constructor () {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const pagesize = +req.params.get('page');
+        const page = +req.params.get('page');
         let data = mockData;
 
         if (req.method === 'GET') {
-            data = data.filter((element: number) => element === pagesize);
+            data = page ? [data[page]] : data;
         } else if (req.method === 'POST') {
             data = data.concat(...req.body);
         } else if (req.method === 'PUT') {
