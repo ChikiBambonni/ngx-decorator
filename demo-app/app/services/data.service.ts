@@ -8,39 +8,66 @@ import {
   Post,
   Put,
   Patch,
-  Delete
+  Delete,
+  Request
 } from 'lib/decorators/http.decorators';
+import { apiTestEndpoint, apiBaseUrl } from './data.constants';
 
 @Injectable({
   providedIn: 'root'
 })
-@HttpApi('api')
+@HttpApi(apiBaseUrl)
 export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  @Get('database/collection')
+  @Get(apiTestEndpoint)
   getOne(params?: object): Observable<any> {
     return of();
   }
 
-  @Post('database/collection')
+  @Post(apiTestEndpoint)
   addAll(params?: object, body?: object): Observable<any> {
     return of();
   }
 
-  @Put('database/collection')
+  @Put(apiTestEndpoint)
   replaceAll(params?: object, body?: object): Observable<any> {
     return of();
   }
 
-  @Patch('database/collection')
+  @Patch(apiTestEndpoint)
   replaceOne(params?: object, body?: object): Observable<any> {
     return of();
   }
 
-  @Delete('database/collection')
+  @Delete(apiTestEndpoint)
   removeAll(params?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('GET', apiTestEndpoint)
+  getOneRequest(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('POST', apiTestEndpoint)
+  addAllRequest(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('PUT', apiTestEndpoint)
+  replaceAllRequest(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('PATCH', apiTestEndpoint)
+  replaceOneRequest(params?: object, body?: object): Observable<any> {
+    return of();
+  }
+
+  @Request('DELETE', apiTestEndpoint)
+  removeAllRequest(params?: object, body?: object): Observable<any> {
     return of();
   }
 }

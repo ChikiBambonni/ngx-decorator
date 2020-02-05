@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { DataService } from './data.service';
 import { mockData } from '../mock/mock.data';
+import { apiTestEndpoint, apiBaseUrl } from './data.constants';
 
 describe('DataService', () => {
   let injector: TestBed;
@@ -34,8 +35,8 @@ describe('DataService', () => {
 
       done();
     });
-
-    const req = httpMock.expectOne('api/database/collection');
+  
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
@@ -51,7 +52,7 @@ describe('DataService', () => {
       done();
     });
 
-    const req = httpMock.expectOne('api/database/collection');
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
@@ -67,7 +68,7 @@ describe('DataService', () => {
       done();
     });
 
-    const req = httpMock.expectOne('api/database/collection');
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
@@ -83,7 +84,7 @@ describe('DataService', () => {
       done();
     });
 
-    const req = httpMock.expectOne('api/database/collection');
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
@@ -99,7 +100,87 @@ describe('DataService', () => {
       done();
     });
 
-    const req = httpMock.expectOne('api/database/collection');
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('DELETE');
+
+    req.flush(mockData, { status: 200, statusText: 'Success' });
+  });
+
+  it('should return data from @Request decorator with GET method', (done) => {
+    service.getOneRequest().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
+    });
+
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('GET');
+
+    req.flush(mockData, { status: 200, statusText: 'Success' });
+  });
+
+  it('should return data from @Request decorator with POST method', (done) => {
+    service.addAllRequest().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
+    });
+
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('POST');
+
+    req.flush(mockData, { status: 200, statusText: 'Success' });
+  });
+
+  it('should return data from @Request decorator with PUT method', (done) => {
+    service.replaceAllRequest().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
+    });
+
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('PUT');
+
+    req.flush(mockData, { status: 200, statusText: 'Success' });
+  });
+
+  it('should return data from @Request decorator with PATCH method', (done) => {
+    service.replaceOneRequest().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
+    });
+
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toBe('PATCH');
+
+    req.flush(mockData, { status: 200, statusText: 'Success' });
+  });
+
+  it('should return data from @Request decorator with DELETE method', (done) => {
+    service.removeAllRequest().subscribe(data => {
+      expect(data).toBe(mockData);
+
+      done();
+    });
+
+    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
