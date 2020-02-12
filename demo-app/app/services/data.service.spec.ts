@@ -30,161 +30,191 @@ describe('DataService', () => {
   });
 
   it('should return data from @Get decorator', (done) => {
-    service.getOne().subscribe(data => {
+    service.getOne({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
   
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('GET');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Post decorator', (done) => {
-    service.addAll().subscribe(data => {
+    service.addAll({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('POST');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Put decorator', (done) => {
-    service.replaceAll().subscribe(data => {
+    service.replaceAll({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PUT');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Patch decorator', (done) => {
-    service.replaceOne().subscribe(data => {
+    service.replaceOne({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PATCH');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Delete decorator', (done) => {
-    service.removeAll().subscribe(data => {
+    service.removeAll({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('DELETE');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with GET method', (done) => {
-    service.getOneRequest().subscribe(data => {
+    service.getOneRequest({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('GET');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with POST method', (done) => {
-    service.addAllRequest().subscribe(data => {
+    service.addAllRequest({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('POST');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with PUT method', (done) => {
-    service.replaceAllRequest().subscribe(data => {
+    service.replaceAllRequest({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PUT');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with PATCH method', (done) => {
-    service.replaceOneRequest().subscribe(data => {
+    service.replaceOneRequest({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PATCH');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with DELETE method', (done) => {
-    service.removeAllRequest().subscribe(data => {
+    service.removeAllRequest({
+      value: 200
+    }).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
     });
 
-    const req = httpMock.expectOne(`${apiBaseUrl}/${apiTestEndpoint}`);
+    const req = httpMock.expectOne(req => req.url === `${apiBaseUrl}/${apiTestEndpoint}`);
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('DELETE');
+    expect(+req.request.params.get('value')).toEqual(200);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
