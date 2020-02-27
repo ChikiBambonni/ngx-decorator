@@ -1,17 +1,30 @@
 # ngx-decorator
-Set of useful decorators for Angular
+Set of useful decorators for Angular.
 
 # Installation
-
 ```bash
 npm install ngx-decorator --save
-
 ```
 
 # Supported decorators
+- [Lifecycle hooks decorators](#lifecycle-hooks)
+  * [@TakeUntilDestroy](#take-until-destroy-decorator)
+  * [@TrackChanges](#track-changes-decorator)
+- [Utils decorators](#utils-decorators)
+  * [@Safe](#safe-decorator)
+  * [@Cache](#cache-decorator)
+  * [@OutsideAngular](#outside-angular-decorator)
+- [HTTP decorators](#http-decorators)
+  * [@HttpApi](#http-api-decorator)
+  * [@Get](#get-decorator)
+  * [@Post](#post-decorator)
+  * [@Put](#put-decorator)
+  * [@Patch](#patch-decorator)
+  * [@Delete](#delete-decorator)
+  * [@Request](#request-decorator)
 
-1.  `@TakeUntilDestroy` - unsibscribes from an Observeble on `ngOnDestroy` lificycle hook:
-
+## Lifecycle hooks decorators
+1. `@TakeUntilDestroy` - unsibscribes from an Observeble on `ngOnDestroy` lificycle hook:
     First you need to decorate your component class which implements `OnDestroy` interface with `@TakeUntilDestroy` decorator:
     ```typescript
     import { TakeUntilDestroy } from 'ngx-decorator';
@@ -19,7 +32,6 @@ npm install ngx-decorator --save
     @TakeUntilDestroy
     export class CounterComponent implements OnInit, OnDestroy {}
     ```
-
     Next step is to create private field `componentDestroy: Function` in your component and use it in pipe method with rxjs `takeUntil` operator:
     ```typescript
     import { TakeUntilDestroy } from 'ngx-decorator';
@@ -45,7 +57,6 @@ npm install ngx-decorator --save
     ```
 
 2.  `@TrackChanges` - binds `@Input` field to execution of component method with provided changes strategy:
-    
     Decorator accepts 3 argumaents:
         - `key` - name of `@Input()` field
         - `methodName` - name of method to be called when 
@@ -78,8 +89,8 @@ npm install ngx-decorator --save
     }
     ```
 
-3.  `@Safe` - catches application errors and forwards them to proper errorHandler depending on `SafeLogLevel` provided:
-
+## Utils decorators
+1.  `@Safe` - catches application errors and forwards them to proper errorHandler depending on `SafeLogLevel` provided:
     Decorator accepts 1 argumaent of type `SafeParams<T>`:
     ```typescript
     export interface SafeParams<T> {
@@ -87,7 +98,6 @@ npm install ngx-decorator --save
         returnValue?: T; // returnValue if error was thrown
     }
     ```
-
     Available Log Levels: 
     ```typescript
     export enum SafeLogLevel {
@@ -96,9 +106,7 @@ npm install ngx-decorator --save
         ErrorHandler = 'ErrorHandler' // forward error to errorHandler. Class with 'Safe' decorator and logLevel 'ErrorHandler' should have 'errorHandler' class property with 'ErrorHandler' class.
     }
     ```
-    
     Decorate any method in component with `@Safe` decorator in following way:
-
     ```typescript
     import { Safe, SafeLogLevel } from 'ngx-decorator';
 
@@ -119,7 +127,6 @@ npm install ngx-decorator --save
         }
     }
     ```
-
     Then see error in your ErrorHandler class:
     ```typescript
     class MyErrorHandler implements ErrorHandler {
@@ -128,17 +135,14 @@ npm install ngx-decorator --save
         }
     }
     ```
-4.  `@Cache` - caches results of functions:
-
+2.  `@Cache` - caches results of functions:
     Decorator accepts 1 argumaent of type `CacheParams<T>`:
     ```typescript
     export interface CacheParams {
         cacheKey?: string; // key name used to access cache data. You can provide your own or keep default (then name of called method will be used)
         useParamsAsKeys?: boolean; // if true cache will be stored depending on method arguments, if false every call to function will extract data from cache.
     }
-
     ```
-
     Store result of a function in cache: 
     ```typescript
     import { Cache, Safe } from 'ngx-decorator';
@@ -172,10 +176,8 @@ npm install ngx-decorator --save
     ```
     In this snippet result of forth call to `this.add` will be retrived from cache.
 
-5.  `@OutsideAngular` - escape Angular's zone and do work that doesn't trigger Angular change-detection
-
+3.  `@OutsideAngular` - escape Angular's zone and do work that doesn't trigger Angular change-detection
     Decorator does not accepts parameters:
-
     ```typescript
     import { OutsideAngular } from 'ngx-decorator';
 
@@ -208,3 +210,105 @@ npm install ngx-decorator --save
     }
     ```
     In this snippet each tick of `increaseProgress` function willbe executed in Angular's parent zone
+
+## HTTP decorators
+To start using http decorators first you need to decorate you class with `@HttpApi` decorator:
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { HttpApi } from 'ngx-decorator';
+
+@Injectable()
+@HttpApi('api')
+export class DataService {
+
+    constructor(private httpClient: HttpClient) { }
+}
+```
+`@HttpApi` decorator is used to define base API url. For example in this url - `/api/user/1488`, `api` is base url. Once base url defined you can start using http decorators:
+1.  `@Get` - performs HTTP GET call to endpoint with HttpParams:
+    ```typescript
+    ...
+    import { HttpApi, Get } from 'ngx-decorator';
+
+    @Injectable()
+    @HttpApi('api')
+    export class DataService {
+
+        constructor(private httpClient: HttpClient) { }
+
+        @Get('users')
+        getOne(params?: object): Observable<any> { // <-------- makes GET request to /api/users with params defined
+            return of();
+        }
+    }
+    ```
+2.  `@Post` - performs HTTP POST call to endpoint with HttpParams:
+    ```typescript
+    ...
+    import { HttpApi, Post } from 'ngx-decorator';
+
+    @Injectable()
+    @HttpApi('api')
+    export class DataService {
+
+        constructor(private httpClient: HttpClient) { }
+
+        @Post('users/save')
+        addAll(params?: object, body?: object): Observable<any> { // <-------- makes POST request to /api/users/save with params and request body defined
+            return of();
+        }
+    }
+    ```
+3.  `@Put` - performs HTTP PUT call to endpoint with HttpParams:
+    ```typescript
+    ...
+    import { HttpApi, Put } from 'ngx-decorator';
+
+    @Injectable()
+    @HttpApi('api')
+    export class DataService {
+
+        constructor(private httpClient: HttpClient) { }
+
+        @Put('users/save')
+        replaceAll(params?: object, body?: object): Observable<any> { // <-------- makes PUT request to /api/users/save with params and request body defined
+            return of();
+        }
+    }
+    ```
+4.  `@Patch` - performs HTTP PATCH call to endpoint with HttpParams:
+    ```typescript
+    ...
+    import { HttpApi, Patch } from 'ngx-decorator';
+
+    @Injectable()
+    @HttpApi('api')
+    export class DataService {
+
+        constructor(private httpClient: HttpClient) { }
+
+        @Patch('users/save')
+        replaceOne(params?: object, body?: object): Observable<any> { // <-------- makes PATCH request to /api/users/save with params and request body defined
+            return of();
+        }
+    }
+    ```
+5.  `@Delete` - performs HTTP DELETE call to endpoint with HttpParams:
+    ```typescript
+    ...
+    import { HttpApi, Delete } from 'ngx-decorator';
+
+    @Injectable()
+    @HttpApi('api')
+    export class DataService {
+        
+        constructor(private httpClient: HttpClient) { }
+
+        @Delete('users')
+        removeAll(params?: object): Observable<any> { // <-------- makes DELETE request to /api/users with params defined
+            return of();
+        }
+    }
+    ```
