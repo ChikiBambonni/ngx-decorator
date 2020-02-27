@@ -47,7 +47,7 @@ export class DataService {
   }
 
   @Request('GET', apiTestEndpoint)
-  getOneRequest(params?: object, body?: object): Observable<any> {
+  getOneRequest(params?: object): Observable<any> {
     return of();
   }
 
@@ -67,7 +67,7 @@ export class DataService {
   }
 
   @Request('DELETE', apiTestEndpoint)
-  removeAllRequest(params?: object, body?: object): Observable<any> {
+  removeAllRequest(params?: object): Observable<any> {
     return of();
   }
 }

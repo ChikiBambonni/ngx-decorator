@@ -1,5 +1,6 @@
-import { TestBed, getTestBed, inject, fakeAsync } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpParams } from '@angular/common/http';
 
 import { DataService } from './data.service';
 import { mockData } from '../mock/mock.data';
@@ -9,6 +10,8 @@ describe('DataService', () => {
   let injector: TestBed;
   let service: DataService;
   let httpMock: HttpTestingController;
+
+  const getParamsAsJSON: any = (params: HttpParams) => params.keys().map((key: string) => ({ [key]: params.get(key) })).shift();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -30,9 +33,11 @@ describe('DataService', () => {
   });
 
   it('should return data from @Get decorator', (done) => {
-    service.getOne({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+
+    service.getOne(params).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -43,15 +48,20 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('GET');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Post decorator', (done) => {
-    service.addAll({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = { 
+      data: [] 
+    };
+    
+    service.addAll(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -62,15 +72,21 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('POST');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Put decorator', (done) => {
-    service.replaceAll({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = {
+      data: []
+    };
+
+    service.replaceAll(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -81,15 +97,21 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PUT');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Patch decorator', (done) => {
-    service.replaceOne({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = {
+      data: []
+    };
+
+    service.replaceOne(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -100,15 +122,18 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PATCH');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Delete decorator', (done) => {
-    service.removeAll({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+
+    service.removeAll(params).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -119,15 +144,17 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('DELETE');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with GET method', (done) => {
-    service.getOneRequest({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+
+    service.getOneRequest(params).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -138,15 +165,21 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('GET');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toBeNull();
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with POST method', (done) => {
-    service.addAllRequest({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = {
+      data: []
+    };
+
+    service.addAllRequest(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -157,15 +190,21 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('POST');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with PUT method', (done) => {
-    service.replaceAllRequest({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = {
+      data: []
+    };
+
+    service.replaceAllRequest(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -176,15 +215,21 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PUT');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with PATCH method', (done) => {
-    service.replaceOneRequest({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+    const body = {
+      data: []
+    };
+
+    service.replaceOneRequest(params, body).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -195,15 +240,18 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('PATCH');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toEqual(body);
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });
 
   it('should return data from @Request decorator with DELETE method', (done) => {
-    service.removeAllRequest({
+    const params = {
       value: 200
-    }).subscribe(data => {
+    };
+
+    service.removeAllRequest(params).subscribe(data => {
       expect(data).toBe(mockData);
 
       done();
@@ -214,7 +262,8 @@ describe('DataService', () => {
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
     expect(req.request.method).toBe('DELETE');
-    expect(+req.request.params.get('value')).toEqual(200);
+    expect(req.request.body).toBeNull();
+    expect(getParamsAsJSON(req.request.params)).toEqual(params);
 
     req.flush(mockData, { status: 200, statusText: 'Success' });
   });

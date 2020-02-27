@@ -20,7 +20,7 @@ const getRequestParams = (params: object | null): HttpParams => {
     }
 
     return requestParams;
-  };
+};
 
 export function HttpApi(apiUrl: string) {
     return (constructor: any) => {
