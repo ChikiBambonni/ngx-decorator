@@ -1,6 +1,6 @@
 {
   "name": "ngx-decorator",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Set of useful decorators for Angular",
   "author": "Danil Litvinchuk",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "ngx",
     "decorator",
     "decorators",
-    "decoratre",
+    "decorate",
     "angular",
     "Angular"
   ],
@@ -34,6 +34,11 @@
     "publish:dist": "npm run compile && npm publish dist-lib"
   },
   "dependencies": {},
+  "peerDependencies": {
+    "@angular/core": "~8.2.14",
+    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser-dynamic": "~8.2.14"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.23",
     "@angular/animations": "~8.2.14",
