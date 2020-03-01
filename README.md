@@ -1,8 +1,6 @@
 # ngx-decorator
 Set of useful decorators for Angular.
-
-[![NPM Downloads/Month]](https://www.npmjs.com/package/ngx-decorator)
-[![NPM Downloads]](https://www.npmjs.com/package/ngx-decorator)
+[![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url]
 
 # Installation
 ```bash
@@ -394,3 +392,8 @@ export class DataService {
     }
 }
 ```
+
+[npm-image]: https://badge.fury.io/js/ngx-decorator.svg	
+[npm-url]: https://www.npmjs.com/package/ngx-decorator
+[downloads-image]: https://img.shields.io/npm/dm/ngx-decorator.svg
+[downloads-url]: https://www.npmjs.com/package/ngx-decorator
