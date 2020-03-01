@@ -15,7 +15,6 @@ npm install ngx-decorator --save
   * [@Cache](#cache-decorator)
   * [@OutsideAngular](#outside-angular-decorator)
 - [HTTP decorators](#http-decorators)
-  * [@HttpApi](#http-api-decorator)
   * [@Get](#get-decorator)
   * [@Post](#post-decorator)
   * [@Put](#put-decorator)
