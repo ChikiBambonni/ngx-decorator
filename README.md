@@ -12,7 +12,7 @@ npm install ngx-decorator --save
   * [@TrackChanges](#track-changes-decorator)
 - [Utils decorators](#utils-decorators)
   * [@Safe](#safe-decorator)
-  * [@Cache](#cache-decorator)
+  * [Cache](#cache-decorator)
   * [@OutsideAngular](#outside-angular-decorator)
 - [HTTP decorators](#http-decorators)
   * [@HttpApi](#http-api-decorator)
@@ -91,9 +91,14 @@ export class CounterComponent implements OnChanges {
 }
 ```
 
-## Utils decorators
+Utils decorators
+=========================
+
 Useful utils decorator for Angular
-### @Safe
+
+@Safe
+-----
+
 `@Safe` - catches application errors and forwards them to proper errorHandler depending on `SafeLogLevel` provided:
 Decorator accepts 1 argumaent of type `SafeParams<T>`:
 ```typescript
@@ -139,7 +144,11 @@ class MyErrorHandler implements ErrorHandler {
     }
 }
 ```
-### @Cache
+
+Cache
+-----
+
+
 `@Cache` - caches results of functions:
 Decorator accepts 1 argumaent of type `CacheParams<T>`:
 ```typescript
