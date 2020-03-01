@@ -25,7 +25,7 @@ npm install ngx-decorator --save
 
 ## Lifecycle hooks decorators
 Decorators for Angular lifecycle management
-#### @TakeUntilDestroy
+### @TakeUntilDestroy
 `@TakeUntilDestroy` - unsibscribes from an Observeble on `ngOnDestroy` lificycle hook:
 First you need to decorate your component class which implements `OnDestroy` interface with `@TakeUntilDestroy` decorator:
 ```typescript
@@ -57,7 +57,7 @@ export class CounterComponent implements OnInit, OnDestroy {
     }
 }
 ```
-#### @TrackChanges
+### @TrackChanges
 `@TrackChanges` - binds `@Input` field to execution of component method with provided changes strategy:
 Decorator accepts 3 argumaents:
     - `key` - name of `@Input()` field
@@ -93,7 +93,7 @@ export class CounterComponent implements OnChanges {
 
 ## Utils decorators
 Useful utils decorator for Angular
-#### @Safe
+### @Safe
 `@Safe` - catches application errors and forwards them to proper errorHandler depending on `SafeLogLevel` provided:
 Decorator accepts 1 argumaent of type `SafeParams<T>`:
 ```typescript
@@ -139,7 +139,7 @@ class MyErrorHandler implements ErrorHandler {
     }
 }
 ```
-#### @Cache
+### @Cache
 `@Cache` - caches results of functions:
 Decorator accepts 1 argumaent of type `CacheParams<T>`:
 ```typescript
@@ -180,7 +180,7 @@ export class CounterComponent implements OnInit {
 }
 ```
 In this snippet result of forth call to `this.add` will be retrived from cache.
-#### @OutsideAngular
+### @OutsideAngular
 `@OutsideAngular` - escape Angular's zone and do work that doesn't trigger Angular change-detection
 Decorator does not accepts parameters:
 ```typescript
@@ -231,7 +231,7 @@ export class DataService {
 }
 ```
 `@HttpApi` decorator is used to define base API url. For example in this url - `/api/user/1488`, `api` is base url. Once base url defined you can start using http decorators:
-#### @Get
+### @Get
 `@Get` - makes HTTP GET request with HttpParams:
 ```typescript
 ...
@@ -249,7 +249,7 @@ export class DataService {
     }
 }
 ```
-#### @Post
+### @Post
 `@Post` - makes HTTP POST request with HttpParams:
 ```typescript
 ...
@@ -267,7 +267,7 @@ export class DataService {
     }
 }
 ```
-#### @Put
+### @Put
 `@Put` - makes HTTP PUT request with HttpParams:
 ```typescript
 ...
@@ -285,7 +285,7 @@ export class DataService {
     }
 }
 ```
-#### @Patch
+### @Patch
 `@Patch` - makes HTTP PATCH request with HttpParams:
 ```typescript
 ...
@@ -303,7 +303,7 @@ export class DataService {
     }
 }
 ```
-#### @Delete
+### @Delete
 `@Delete` - makes HTTP DELETE request with HttpParams:
 ```typescript
 ...
@@ -321,7 +321,7 @@ export class DataService {
     }
 }
 ```
-#### @Request
+### @Request
 `@Request` - makes HTTP request with defined method: 
 ```typescript
 ...
