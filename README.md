@@ -1,6 +1,8 @@
 # ngx-decorator
 Set of useful decorators for Angular.
-[![NPM Version][npm-image]][npm-url] [![NPM Downloads][downloads-image]][downloads-url]
+
+[![NPM Version][npm-image]][npm-url] 
+[![NPM Downloads][downloads-image]][downloads-url]
 
 # Installation
 ```bash
