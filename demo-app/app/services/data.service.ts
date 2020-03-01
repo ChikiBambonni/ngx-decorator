@@ -10,7 +10,7 @@ import {
   Patch,
   Delete,
   Request
-} from 'lib/decorators/http.decorators';
+} from 'lib';
 import { apiTestEndpoint, apiBaseUrl } from './data.constants';
 
 @Injectable({

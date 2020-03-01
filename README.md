@@ -1,6 +1,9 @@
 # ngx-decorator
 Set of useful decorators for Angular.
 
+[![NPM Downloads/Month]](https://www.npmjs.com/package/ngx-decorator)
+[![NPM Downloads]](https://www.npmjs.com/package/ngx-decorator)
+
 # Installation
 ```bash
 npm install ngx-decorator --save
