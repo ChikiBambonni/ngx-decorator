@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +14,9 @@ import {
 } from 'lib';
 import { Observable, of } from 'rxjs';
 
+import { PageParams } from 'lib';
+import { Route } from '@angular/compiler/src/core';
+
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
@@ -21,79 +25,25 @@ import { Observable, of } from 'rxjs';
 @HttpApi('capi')
 export class TodosComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  todoId: number;
+
+  @PageParams({
+    key: 'todoId',
+    redirectTo: '/404',
+    paramName: 'todoId',
+    type: 'number'
+  })
+  private setTodo(value?: number): void {
+    this.todoId = value;
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.getAll({
-      page: 1
-    }).subscribe(data => {
-      console.log('Retrieving data - ', data);
-    });
-
-    this.getViaRequest({
-      page: 9
-    }).subscribe(data => {
-      console.log('Retrieving data via request - ', data);
-    });
-
-    this.addOne(null, [20, 30, 40]).subscribe(data => {
-      console.log("POST Data - ", data);
-    });
-
-    this.addPost(null, [50, 60, 70]).subscribe(data => {
-      console.log("POST Data - ", data);
-    });
-
-    this.replacePosts(null, [80, 90]).subscribe(data => {
-      console.log("PUT Data - ", data);
-    });
-
-    this.replacePost(null, {
-      value: 200 
-    }).subscribe(data => {
-      console.log("Patch Data - ", data);
-    });
-
-    this.removePosts({
-      value: 200
-    }).subscribe(data => {
-      console.log("Delete Data - ", data);
-    });
-
-  }
-
-  @Get('mongoAPI_tests/Users')
-  getAll(params?: object): Observable<any> {
-    return of();
-  }
-
-  @Post('mongoAPI_tests/Users')
-  addPost(params?: object, body?: object): Observable<any> {
-    return of();
-  }
-
-  @Put('mongoAPI_tests/Users')
-  replacePosts(params?: object, body?: object): Observable<any> {
-    return of();
-  }
-
-  @Patch('mongoAPI_tests/Users')
-  replacePost(params?: object, body?: object): Observable<any> {
-    return of();
-  }
-
-  @Delete('mongoAPI_tests/Users')
-  removePosts(params?: object): Observable<any> {
-    return of();
-  }
-
-  @Request('GET', 'mongoAPI_tests/Users')
-  getViaRequest(params?: object, body?: object): Observable<any> {
-    return of();
-  }
-
-  @Request('POST', 'mongoAPI_tests/Users')
-  addOne(params?: object, body?: object): Observable<any> {
-    return of();
+    this.setTodo();
+    console.log(this.todoId);
   }
 }

@@ -4,3 +4,4 @@ export * from './decorators/safe.decorator';
 export * from './decorators/cache.decorator';
 export * from './decorators/outside-angular.decorator';
 export * from './decorators/http.decorators';
+export * from './decorators/page-params.decorator';
